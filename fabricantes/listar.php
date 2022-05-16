@@ -1,3 +1,10 @@
+<?php
+require_once "../src/funcoes-fabricantes.php";
+$listaDeFabricantes = lerFabricantes($conexao);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,7 +19,37 @@
     <h1>Fabricantes | SELECT</h1>
     <hr>
     <h2>Lendo e carregando todos os fabricantes</h2>
-    
+
+    <table>
+        <caption>Lista de Fabricantes</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+            </tr>
+
+
+            
+
+        </thead>
+        <tbody>
+
+    <?php
+       
+    foreach ($listaDeFabricantes as $fabricante ) {?>
+         
+           <tr>
+              <td> <?=$fabricante['id']?> </td>
+              <td> <?=$fabricante['nome']?> </td> 
+           </tr>
+
+        <?php   
+       } 
+       ?>
+
+        </tbody>
+    </table>
+
 </div>
     
 </body>
