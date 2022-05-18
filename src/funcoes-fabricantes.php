@@ -28,4 +28,16 @@ function lerFabricantes (PDO $conexao):array {
     };
         return $resultado;
 };
+
+
+
+
+
+// Inserir um Fabricante
+
+function inserirFabricante(PDO $conexao, string $nome ) {
+    
+}
 ?>
+
+

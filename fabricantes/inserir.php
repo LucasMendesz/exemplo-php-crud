@@ -1,7 +1,14 @@
 <?php
 // Verificando se o botão do formulário foi acionado
 if( isset($_POST['inserir']) ) {
-    echo "ok!";
+    // Importando as funções e a conexão
+    require_once "../src/funcoes-fabricantes.php";
+    
+    // Capturando o que foi digitado no campo
+    $nome = $_POST['nome'];
+
+
+    inserirFabricantes($conexao, $nome);
 }
 
 
