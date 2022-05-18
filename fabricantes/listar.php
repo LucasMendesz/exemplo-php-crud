@@ -12,6 +12,12 @@ $listaDeFabricantes = lerFabricantes($conexao);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fabricantes - Lista</title>
+
+    <style>
+    td a{
+        color: green;
+    }
+    </style>
 </head>
 <body>
 
@@ -20,12 +26,15 @@ $listaDeFabricantes = lerFabricantes($conexao);
     <hr>
     <h2>Lendo e carregando todos os fabricantes</h2>
 
+   <p><a href="inserir.php">Inserir um novo fabricante</a></p>
+
     <table>
         <caption>Lista de Fabricantes</caption>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
+                <th colspan="2">Operações</th>
             </tr>
 
 
@@ -40,7 +49,9 @@ $listaDeFabricantes = lerFabricantes($conexao);
          
            <tr>
               <td> <?=$fabricante['id']?> </td>
-              <td> <?=$fabricante['nome']?> </td> 
+              <td> <?=$fabricante['nome']?> </td>
+              <td> <a href="Atualizar.php?test">Atualizar</a> </td>
+              <td> <a href="">Excluir</a> </td> 
            </tr>
 
         <?php   

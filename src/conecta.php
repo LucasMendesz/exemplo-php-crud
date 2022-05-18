@@ -25,7 +25,7 @@ $conexao->setAttribute (
 );
 
 } catch (Exception $erro) {
-    die("Erro: " .$erro->getMensage());
+    die("Erro: " .$erro->getMessage());
 }
 //var_dump($conexao); //teste
 ?>
