@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\sql_injection_subst;
+
 require_once "conecta.php";
 
 // Carregar os dados dos fabricantes
@@ -43,7 +46,7 @@ function inserirFabricante(PDO $conexao, string $nome ):void {
         // Preparação do comando
         $consulta = $conexao->prepare($sql);
 
-        // bindParam('nome do parametro',$variavel_com_valor, constante de verificação)
+        // bindParam('nome do parametro',$variavel_com_valor, constante de verificação) , tratar os parâmetros
         $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
         $consulta->execute();
 
@@ -52,6 +55,37 @@ function inserirFabricante(PDO $conexao, string $nome ):void {
     };
        
 }
+
+function lerUmFabricante(PDO $conexao, int $id):array {
+        $sql = "SELECT id, nome FROM fabricantes WHERE id = :id";
+         
+        try {
+            $consulta = $conexao->prepare($sql);
+            $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC); 
+        } catch (Exception $erro) {
+            die("erro:" .$erro->getMessage());
+        };
+           return $resultado;
+};
+
+function atualizarFabricante(PDO $conexao, int $id, string $nome):void {
+    $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+
+    try {
+        // Preparação do comando
+        $consulta = $conexao->prepare($sql);
+
+        // bindParam('nome do parametro',$variavel_com_valor, constante de verificação) , tratar os parâmetros
+        $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+        $consulta->execute();
+
+    } catch (Exception $erro) {
+        die("erro:" .$erro->getMessage());
+    };
+};
 ?>
 
 

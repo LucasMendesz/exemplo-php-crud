@@ -16,6 +16,7 @@ if( isset($_POST['inserir']) ) {
      
     // Redirecionamento
     header("location:listar.php");
+
 }
 
 
