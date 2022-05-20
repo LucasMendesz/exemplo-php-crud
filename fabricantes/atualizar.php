@@ -6,10 +6,24 @@ require_once "../src/funcoes-fabricantes.php";
 
 $fabricante = lerUmFabricante($conexao, $id);
 
+if (isset($_POST['atualizar'])) {
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
 
+    atualizarFabricante($conexao, $id, $nome);
+
+    //header("location:listar.php");
+
+    // Mensagem + Refresh
+    /*echo "Fabricante atualizado com sucesso!";
+    header("Refresh:3; url=listar.php"); */
+ 
+    // Só com o nome do parâmetro
+    /*header("location:listar.php?sucesso"); */
+
+    // Com nome de parâmetro e valor
+    header("location:listar.php?status=sucesso");
+};
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,7 +35,7 @@ $fabricante = lerUmFabricante($conexao, $id);
 <body>
 
 <div class="container">
-    <h1>Fabricantes | SELECT/UPDATE</h1>
+    <h1>Fabricantes | SELECT</h1>
     <hr>
 
 
@@ -32,11 +46,11 @@ $fabricante = lerUmFabricante($conexao, $id);
             <label for="text">Nome</label>
             <input value="<?=$fabricante['nome']?>" type="text" name="nome" id="nome">
         </p>
-        <button type="submit" name="Atualizar">Atualizar fabricante</button>
+        <button type="submit" name="atualizar">Atualizar fabricante</button>
     </form>
 </div>
 
-<p><a href="inserir.php">Voltar para lista de fabricante</a></p>
+<p><a href="listar.php">Voltar para lista de fabricante</a></p>
 <p><a href="../index.php">Home</a></p>
     
 </body>
