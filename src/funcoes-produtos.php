@@ -3,7 +3,13 @@
 require_once "conecta.php";
 
 function lerProdutos(PDO $conexao ) {
-   $sql = "SELECT id, nome, descricao, preco, quantidade, fabricante_id FROM produtos ORDER BY nome";
+   $sql = "SELECT produtos.id,
+    produtos.nome AS produto,
+     produtos.preco,
+      produtos.quantidade,
+       produtos.descricao,
+        fabricantes.nome AS fabricante
+         FROM produtos INNER JOIN fabricantes  ON produtos.fabricante_id = fabricantes.id  ORDER BY produtos.nome";
 
    try {
 
@@ -22,9 +28,15 @@ function lerProdutos(PDO $conexao ) {
 
 /* Funções utilitárias */
 
+ function formataMoeda(float $valor):string {
+     return "R$ ". number_format($valor, 2, ",", ".");
+ };
+
 function dump($dados) {
 
        echo "<pre>";
             var_dump($dados);
             "</pre>";
 };
+
+

@@ -4,6 +4,7 @@ require_once "../src/funcoes-produtos.php";
 
 $listaDeProdutos = lerProdutos($conexao);
 
+
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +14,16 @@ $listaDeProdutos = lerProdutos($conexao);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos - Lista</title>
+
+    <style>
+        body{
+
+        }
+        .produtos{
+            color: black;
+            
+        }
+    </style>
 
 </head>
 <body>
@@ -42,12 +53,17 @@ $listaDeProdutos = lerProdutos($conexao);
 
          <article>
 
-           <p> ID: <?=$produto['id']?> </p>
-           <h3> Nome do produto: <?=$produto['nome']?> </h3>
-           <p> Preco: <?=$produto ['preco']?> </p>
-           <p> Quantidade: <?=$produto['quantidade']?> </p>
-           <p> Descrição: <?=$produto['descricao']?> </p>
-           <p> Fabricante: <?=$produto['fabricante_id']?> </p>
+           <p> <b>ID:</b> <?=$produto['id']?> </p>
+           <h3> <b>Nome do produto:</b> <?=$produto['produto']?> </h3>
+
+        
+           <p> <b>Preço:</b> <?=number_format($produto ['preco'], 2, ",", ".")?> </p> 
+
+           <p> <b>Preço:</b> <?=formataMoeda($produto ['preco'])?> </p>
+
+           <p> <b>Quantidade:</b> <?=$produto['quantidade']?> </p>
+           <p> <b>Descrição:</b> <?=$produto['descricao']?> </p>
+           <p> <b>Fabricante:</b> <?=$produto['fabricante']?> </p>
 
            <a href="atualizar.php?id=<?=$produto['id']?> ">Atualizar</a>
            <a href="excluir.php?id=<?=$produto['id']?> ">Excluir</a>
@@ -60,6 +76,8 @@ $listaDeProdutos = lerProdutos($conexao);
    }
    ?>
 </section>
+
+
 
 </body>
 </html>
