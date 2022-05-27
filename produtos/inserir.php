@@ -1,26 +1,4 @@
-<?php
-// Verificando se o botão do formulário foi acionado
-if( isset($_POST['inserir']) ) {
-    // Importando as funções e a conexão
-    require_once "../src/funcoes-fabricantes.php";
-    
-    // Capturando o que foi digitado no campo
-    // $nome = $_POST['nome'];
 
-    // Capturando e limpando o que foi digitado no campo nome
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-     
-
-    // Chamando a função e passando os dados de conexão e o nome digitado
-    inserirFabricante($conexao, $nome);
-     
-    // Redirecionamento
-    header("location:listar.php");
-
-}
-
-
-?>
 
 
 <!DOCTYPE html>
@@ -29,12 +7,12 @@ if( isset($_POST['inserir']) ) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fabricantes - Inserir</title>
+    <title>Produtos - Inserir</title>
 </head>
 <body>
 
 <div class="container">
-    <h1>Fabricantes | INSERT</h1>
+    <h1>Produtos | INSERT</h1>
     <hr>
 
 
@@ -44,12 +22,42 @@ if( isset($_POST['inserir']) ) {
             <label for="text">Nome</label>
             <input type="text" name="nome" id="nome">
         </p>
-        <button type="submit" name="inserir">inserir fabricante</button>
+
+        <p>
+            <label for="Preço">Preço</label>
+            <input type="number" name="preco" id="preco" step="0.01">
+        </p>
+
+        <p>
+            <label for="Quantidade">Quantidade</label>
+            <input type="number" name="quantidade" id="quantidade" min="0" max="100" step="0.0.1" required>
+        </p>
+
+        <p>
+            <label for="Fabricante">Fabricante</label>
+            <select name="Fabricante" id="Fabricante" required>
+                <option value=""></option>
+
+            </select>
+        </p>
+
+         <p>
+            <label for="Descricao">Descrição:</label>
+            <textarea name="descricao" id="Descrição" cols="30" rows="3" required></textarea>
+        </p>
+
+        </p>
+        <button type="submit" name="inserir">inserir Produtos</button>
     </form>
 </div>
 
-<p><a href="inserir.php">Voltar para lista de fabricante</a></p>
+<p><a href="inserir.php">Voltar para lista de Produtos</a></p>
 <p><a href="../index.php">Home</a></p>
+
+
+
+
+
     
 </body>
 </html>

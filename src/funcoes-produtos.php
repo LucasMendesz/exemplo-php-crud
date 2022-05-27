@@ -26,6 +26,8 @@ function lerProdutos(PDO $conexao ) {
    
 };
 
+
+
 /* Funções utilitárias */
 
  function formataMoeda(float $valor):string {

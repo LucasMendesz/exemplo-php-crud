@@ -15,16 +15,6 @@ $listaDeProdutos = lerProdutos($conexao);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos - Lista</title>
 
-    <style>
-        body{
-
-        }
-        .produtos{
-            color: black;
-            
-        }
-    </style>
-
 </head>
 <body>
 
