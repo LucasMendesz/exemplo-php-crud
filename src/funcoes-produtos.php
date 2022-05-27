@@ -42,3 +42,30 @@ function dump($dados) {
 };
 
 
+
+function inserirProdutos(PDO $conexao, string $nome, float $preco, int $quantidade, string $descricao, int $fabricanteId):void {
+
+    $sql = "INSERT INTO produtos (nome, preco, quantidade, descricao, fabricante_id) VALUES (:nome, :preco, :quantidade, :descricao, :fabricante_id)";
+
+
+    try {
+        
+         $consulta = $conexao->prepare($sql);
+
+         $consulta ->bindParam(':nome', $nome, PDO::PARAM_STR);
+         $consulta ->bindParam(':preco', $preco, PDO::PARAM_STR); // PDO NAO TEM TRATAMENTO PARA TRATAR NÚMEROS DECIMAIS, POR ISSO USAMOS PARAM_STR.
+         $consulta ->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
+         $consulta ->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+         $consulta ->bindParam(':fabricante_id', $fabricanteId, PDO::PARAM_INT);
+
+         $consulta->execute();
+
+
+
+
+    } catch (Exception $erro) {
+        die("erro: ". $erro->getMessage());
+    }
+};
+
+

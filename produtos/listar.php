@@ -47,7 +47,7 @@ $listaDeProdutos = lerProdutos($conexao);
            <h3> <b>Nome do produto:</b> <?=$produto['produto']?> </h3>
 
         
-           <p> <b>Preço:</b> <?=number_format($produto ['preco'], 2, ",", ".")?> </p> 
+           <!-- <p> <b>Preço:</b> <?=number_format($produto ['preco'], 2, ",", ".")?> </p>  -->
 
            <p> <b>Preço:</b> <?=formataMoeda($produto ['preco'])?> </p>
 
