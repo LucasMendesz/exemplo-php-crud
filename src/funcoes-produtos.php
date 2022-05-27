@@ -69,3 +69,25 @@ function inserirProdutos(PDO $conexao, string $nome, float $preco, int $quantida
 };
 
 
+function lerUmProduto(PDO $conexao, int $id):array {
+    
+    $sql = "SELECT id, nome, preco, quantidade, preco, fabricante_id FROM produtos WHERE id = :id";
+
+    try {
+
+        $consulta = $conexao->prepare($sql);
+
+        $consulta ->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $consulta->execute();
+
+        $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (Exception $erro) {
+        die("erro: ". $erro->getMessage());
+    }
+
+    return $resultado;
+};
+
+

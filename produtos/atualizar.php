@@ -1,22 +1,16 @@
 <?php
 
 require_once "../src/funcoes-fabricantes.php";
-
+require_once "../src/funcoes-produtos.php";
 $listaDeFabricantes = lerFabricantes($conexao);
 
-if(isset($_POST['inserir'])) {
-    require_once "../src/funcoes-produtos.php";
+// Pegando o valor do id e sanitizando
+$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-    $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
-    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
-    $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
-    $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
+// Chamando a função e recuperando os dados do produto
+$produto = lerUmProduto($conexao, $id);
 
-    inserirProdutos($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId);
 
-    header("location:listar.php");
-};
 
 
 ?>
@@ -28,12 +22,12 @@ if(isset($_POST['inserir'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos - Inserir</title>
+    <title>Produtos - Atualizar</title>
 </head>
 <body>
 
 <div class="container">
-    <h1>Produtos | INSERT</h1>
+    <h1>Produtos | PRODUTOS | SELECT UPDATE</h1>
     <hr>
 
 
@@ -79,7 +73,7 @@ if(isset($_POST['inserir'])) {
         </p>
 
         </p>
-        <button type="submit" name="inserir">inserir Produtos</button>
+        <button type="submit" name="atualizar">Atualizar Produtos</button>
     </form>
 </div>
 
