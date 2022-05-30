@@ -10,12 +10,23 @@ $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 // Chamando a função e recuperando os dados do produto
 $produto = lerUmProduto($conexao, $id);
 
+//dump($produto);
 
+if(isset($_POST['atualizar'])) {
+    
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+    $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
+    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
+    $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
+    $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
+
+    atualizarProduto($conexao, $id, $nome, $preco, $quantidade, $descricao, $fabricanteId);
+
+    header("location:listar.php");
+};
 
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,18 +45,18 @@ $produto = lerUmProduto($conexao, $id);
 
     <form action="" method="post">
         <p>
-            <label for="nome">nome</label>
-            <input type="text" name="nome" id="nome">
+            <label for="nome">Nome:</label>
+            <input  value="<?=$produto['nome']?>" type="text" name="nome" id="nome">
         </p>
 
         <p>
-            <label for="preco">preço</label>
-            <input type="number" name="preco" id="preco" step="0.01">
+            <label for="preco">Preço:</label>
+            <input value="<?=$produto['preco']?>" type="number" name="preco" id="preco" step="0.01">
         </p>
 
         <p>
-            <label for="quantidade">Quantidade</label>
-            <input type="number" name="quantidade" id="quantidade" min="0" max="100" step="0.0.1" required>
+            <label for="quantidade">Quantidade:</label>
+            <input value="<?=$produto['quantidade']?>" type="number" name="quantidade" id="quantidade" min="0" max="100" step="0.0.1" required>
         </p>
 
         <p>
@@ -55,7 +66,14 @@ $produto = lerUmProduto($conexao, $id);
                              
                 <?php foreach ($listaDeFabricantes as $fabricante) { ?>
                   <!-- O Value do ID é para o banco-->
-                <option value="<?=$fabricante['id']?> ">
+                <option 
+                  
+                
+                <?php
+                /* Se chave estrangeira for idêntica à chave primária (ou seja, se o código do fabricante do produto bater com o código do fabricante), então coloque o atributo selected no option */
+                if($produto['fabricante_id'] === $fabricante['id']) echo " selected " ?>
+                
+                value="<?=$fabricante['id']?> ">
                         <?=$fabricante['nome']?> <!-- Exibição -->
                 </option>
                 
@@ -68,8 +86,9 @@ $produto = lerUmProduto($conexao, $id);
         </p>
 
          <p>
-            <label for="Descricao">Descrição:</label>
-            <textarea name="descricao" id="Descrição" cols="30" rows="3" required></textarea>
+            <label for="descricao">Descrição:</label>
+
+            <textarea requered name="descricao" id="descricao" cols="30" rows="3"><?=$produto['descricao']?></textarea>
         </p>
 
         </p>
@@ -77,7 +96,7 @@ $produto = lerUmProduto($conexao, $id);
     </form>
 </div>
 
-<p><a href="inserir.php">Voltar para lista de Produtos</a></p>
+<p><a href="listar.php">Voltar para lista de Produtos</a></p>
 <p><a href="../index.php">Home</a></p>
 
 
