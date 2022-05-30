@@ -56,7 +56,7 @@ $listaDeProdutos = lerProdutos($conexao);
            <p> <b>Fabricante:</b> <?=$produto['fabricante']?> </p>
 
            <a href="atualizar.php?id=<?=$produto['id']?> ">Atualizar</a>
-           <a href="excluir.php?id=<?=$produto['id']?> ">Excluir</a>
+           <a class="excluir" href="excluir.php?id=<?=$produto['id']?> ">Excluir</a>
 
         </article>
 
@@ -66,6 +66,8 @@ $listaDeProdutos = lerProdutos($conexao);
    }
    ?>
 </section>
+
+<script src="../js/confirme.js"></script>
 
 
 
