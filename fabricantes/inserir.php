@@ -1,28 +1,20 @@
 <?php
+use CrudPoo\Fabricante;
+require_once "../vendor/autoload.php";
 // Verificando se o botão do formulário foi acionado
 if( isset($_POST['inserir']) ) {
-    // Importando as funções e a conexão
-    require_once "../src/funcoes-fabricantes.php";
-    
-    // Capturando o que foi digitado no campo
-    // $nome = $_POST['nome'];
+    $fabricante = new Fabricante;
 
-    // Capturando e limpando o que foi digitado no campo nome
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+    $fabricante->setNome($_POST['nome']);
      
-
     // Chamando a função e passando os dados de conexão e o nome digitado
     inserirFabricante($conexao, $nome);
      
     // Redirecionamento
     header("location:listar.php");
-
+    $listaDeFabricantes = $fabricante->inserirFabricante();
 }
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -36,8 +28,6 @@ if( isset($_POST['inserir']) ) {
 <div class="container">
     <h1>Fabricantes | INSERT</h1>
     <hr>
-
-
 
     <form action="" method="post">
         <p>

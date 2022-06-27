@@ -1,10 +1,13 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
-$listaDeFabricantes = lerFabricantes($conexao);
+
+use CrudPoo\Fabricante;
+require_once "../vendor/autoload.php";
+$fabricante = new Fabricante;
+
+$listaDeFabricantes = $fabricante->lerFabricantes();
+
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,6 +21,7 @@ $listaDeFabricantes = lerFabricantes($conexao);
         color: green;
     }
     </style>
+
 </head>
 <body>
 
@@ -40,15 +44,10 @@ $listaDeFabricantes = lerFabricantes($conexao);
                 <th>Nome</th>
                 <th colspan="2">Operações</th>
             </tr>
-
-
-            
-
         </thead>
         <tbody>
 
     <?php
-       
     foreach ($listaDeFabricantes as $fabricante ) {?>
          
            <tr>
@@ -65,9 +64,6 @@ $listaDeFabricantes = lerFabricantes($conexao);
 
         </tbody>
     </table>
-
-    
-
 </div>
 
 
@@ -81,8 +77,6 @@ $listaDeFabricantes = lerFabricantes($conexao);
             if(resposta)location.href = links[i].getAttribute('href');
         });
     }
-
-
 </script>
     
 </body>
