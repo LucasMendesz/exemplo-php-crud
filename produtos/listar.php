@@ -1,12 +1,9 @@
 <?php
-
-require_once "../src/funcoes-produtos.php";
-
-$listaDeProdutos = lerProdutos($conexao);
-
-
+use CrudPoo\Produto;
+require_once "../vendor/autoload.php";
+$produto = new Produto;
+$listaDeProdutos = $produto->lerProdutos();
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -45,16 +42,10 @@ $listaDeProdutos = lerProdutos($conexao);
 
            <p> <b>ID:</b> <?=$produto['id']?> </p>
            <h3> <b>Nome do produto:</b> <?=$produto['produto']?> </h3>
-
-        
-           <!-- <p> <b>Preço:</b> <?=number_format($produto ['preco'], 2, ",", ".")?> </p>  -->
-
-           <p> <b>Preço:</b> <?=formataMoeda($produto ['preco'])?> </p>
-
+         <p> <b>Preço:</b> <?=number_format($produto ['preco'], 2, ",", ".")?> </p>
            <p> <b>Quantidade:</b> <?=$produto['quantidade']?> </p>
            <p> <b>Descrição:</b> <?=$produto['descricao']?> </p>
            <p> <b>Fabricante:</b> <?=$produto['fabricante']?> </p>
-
            <a href="atualizar.php?id=<?=$produto['id']?> ">Atualizar</a>
            <a class="excluir" href="excluir.php?id=<?=$produto['id']?> ">Excluir</a>
 

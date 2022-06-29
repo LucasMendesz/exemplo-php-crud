@@ -1,27 +1,22 @@
 <?php
+use CrudPoo\Fabricante;
+use CrudPoo\Produto;
 
-require_once "../src/funcoes-fabricantes.php";
-
-$listaDeFabricantes = lerFabricantes($conexao);
-
+require_once "../vendor/autoload.php";
+$fabricante = new Fabricante;
+$produto = new Produto;
+$listaDeFabricantes = $fabricante->lerFabricantes();
+ 
 if(isset($_POST['inserir'])) {
-    require_once "../src/funcoes-produtos.php";
-
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-    $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
-    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
-    $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
-    $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
-
-    inserirProdutos($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId);
-
+    $produto->setNome($_POST['nome']);
+    $produto->setPreco($_POST['preco']);
+    $produto->setQuantidade($_POST['quantidade']);
+    $produto->setDescricao($_POST['descricao']);
+    $produto->setFabricanteId($_POST['fabricante']);
+    $produto->inserirProdutos();
     header("location:listar.php");
 };
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

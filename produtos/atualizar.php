@@ -1,31 +1,24 @@
 <?php
-
-require_once "../src/funcoes-fabricantes.php";
-require_once "../src/funcoes-produtos.php";
-$listaDeFabricantes = lerFabricantes($conexao);
-
+use CrudPoo\Fabricante;
+use CrudPoo\Produto;
+require_once "../vendor/autoload.php";
+$fabricante = new Fabricante;
+$produto = new Produto;
+$listaDeFabricantes = $fabricante->lerFabricantes();
 // Pegando o valor do id e sanitizando
-$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-
+$produto->setId(($_GET['id']));
 // Chamando a função e recuperando os dados do produto
-$produto = lerUmProduto($conexao, $id);
-
+$umProduto = $produto->lerUmProduto();
 //dump($produto);
-
 if(isset($_POST['atualizar'])) {
-    
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-    $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
-    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
-    $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
-    $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
-
-    atualizarProduto($conexao, $id, $nome, $preco, $quantidade, $descricao, $fabricanteId);
-
+    $produto->setNome($_POST['nome']);
+    $produto->setPreco($_POST['preco']);
+    $produto->setQuantidade($_POST['quantidade']);
+    $produto->setDescricao($_POST['descricao']);
+    $produto->setFabricanteId($_POST['fabricante']);
+    $produto->atualizarProduto();
     header("location:listar.php");
 };
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -41,22 +34,20 @@ if(isset($_POST['atualizar'])) {
     <h1>Produtos | PRODUTOS | SELECT UPDATE</h1>
     <hr>
 
-
-
     <form action="" method="post">
         <p>
             <label for="nome">Nome:</label>
-            <input  value="<?=$produto['nome']?>" type="text" name="nome" id="nome">
+            <input  value="<?=$umProduto['nome']?>" type="text" name="nome" id="nome">
         </p>
 
         <p>
             <label for="preco">Preço:</label>
-            <input value="<?=$produto['preco']?>" type="number" name="preco" id="preco" step="0.01">
+            <input value="<?=$umProduto['preco']?>" type="number" name="preco" id="preco" step="0.01">
         </p>
 
         <p>
             <label for="quantidade">Quantidade:</label>
-            <input value="<?=$produto['quantidade']?>" type="number" name="quantidade" id="quantidade" min="0" max="100" step="0.0.1" required>
+            <input value="<?=$umProduto['quantidade']?>" type="number" name="quantidade" id="quantidade" min="0" max="100" step="0.0.1" required>
         </p>
 
         <p>
@@ -64,17 +55,17 @@ if(isset($_POST['atualizar'])) {
             <select name="fabricante" id="fabricante" required>
             <option value=""></option>
                              
-                <?php foreach ($listaDeFabricantes as $fabricante) { ?>
+                <?php foreach ($listaDeFabricantes as $umFabricante) { ?>
                   <!-- O Value do ID é para o banco-->
                 <option 
                   
                 
                 <?php
                 /* Se chave estrangeira for idêntica à chave primária (ou seja, se o código do fabricante do produto bater com o código do fabricante), então coloque o atributo selected no option */
-                if($produto['fabricante_id'] === $fabricante['id']) echo " selected " ?>
+                if($umProduto['fabricante_id'] === $umFabricante['id']) echo " selected " ?>
                 
-                value="<?=$fabricante['id']?> ">
-                        <?=$fabricante['nome']?> <!-- Exibição -->
+                value="<?=$umFabricante['id']?> ">
+                        <?=$umFabricante['nome']?> <!-- Exibição -->
                 </option>
                 
                 
@@ -88,7 +79,7 @@ if(isset($_POST['atualizar'])) {
          <p>
             <label for="descricao">Descrição:</label>
 
-            <textarea requered name="descricao" id="descricao" cols="30" rows="3"><?=$produto['descricao']?></textarea>
+            <textarea requered name="descricao" id="descricao" cols="30" rows="3"><?=$umProduto['descricao']?></textarea>
         </p>
 
         </p>
