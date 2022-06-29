@@ -5,7 +5,6 @@ use PDO,Exception;
 final class Fabricante {
   private int $id;
   private string $nome; 
-  
  //   Está propriedade receberá os recursos PDO, através da classe Banco (dependência do projeto)
  private PDO $conexao;
 
