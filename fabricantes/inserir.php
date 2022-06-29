@@ -4,15 +4,12 @@ require_once "../vendor/autoload.php";
 // Verificando se o botão do formulário foi acionado
 if( isset($_POST['inserir']) ) {
     $fabricante = new Fabricante;
-
+    // Usamos o setter para definir o nome do novo fabricante
     $fabricante->setNome($_POST['nome']);
-     
-    // Chamando a função e passando os dados de conexão e o nome digitado
-    inserirFabricante($conexao, $nome);
+    $fabricante->inserirFabricante();
      
     // Redirecionamento
     header("location:listar.php");
-    $listaDeFabricantes = $fabricante->inserirFabricante();
 }
 ?>
 <!DOCTYPE html>

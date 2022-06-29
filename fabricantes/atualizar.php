@@ -1,26 +1,16 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
+use CrudPoo\Fabricante;
+require_once "../vendor/autoload.php";
+$fabricante = new Fabricante;
 
-// Obetendo o valor do parâmetro da URL
- $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-
-$fabricante = lerUmFabricante($conexao, $id);
+ $fabricante->setId( $_GET['id'] );
+//  Acessamos o objeto, depois acessa o método lerUmFabricante e o resultado fica guardado na variavel $umFabricante
+ $umFabricante = $fabricante->lerUmFabricante();
+//  var_dump($umFabricante); // Teste
 
 if (isset($_POST['atualizar'])) {
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-
-    atualizarFabricante($conexao, $id, $nome);
-
-    //header("location:listar.php");
-
-    // Mensagem + Refresh
-    /*echo "Fabricante atualizado com sucesso!";
-    header("Refresh:3; url=listar.php"); */
- 
-    // Só com o nome do parâmetro
-    /*header("location:listar.php?sucesso"); */
-
-    // Com nome de parâmetro e valor
+    $fabricante->setNome($_POST['nome']);
+    $fabricante->atualizarFabricante();
     header("location:listar.php?status=sucesso");
 };
 ?>
@@ -38,13 +28,11 @@ if (isset($_POST['atualizar'])) {
     <h1>Fabricantes | SELECT</h1>
     <hr>
 
-
-
     <form action="" method="post">
-        <input type="hidden" name="<?=$fabricante['id']?>">
+        <input type="hidden" name="<?=$umFabricante['id']?>">
         <p>
             <label for="text">Nome</label>
-            <input value="<?=$fabricante['nome']?>" type="text" name="nome" id="nome">
+            <input value="<?=$umFabricante['nome']?>" type="text" name="nome" id="nome">
         </p>
         <button type="submit" name="atualizar">Atualizar fabricante</button>
     </form>
