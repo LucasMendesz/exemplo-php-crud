@@ -87,11 +87,5 @@ if(isset($_POST['atualizar'])) {
 
 <p><a href="listar.php">Voltar para lista de Produtos</a></p>
 <p><a href="../index.php">Home</a></p>
-
-
-
-
-
-    
 </body>
 </html>
