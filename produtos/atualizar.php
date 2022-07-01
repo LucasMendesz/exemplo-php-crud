@@ -1,7 +1,7 @@
 <?php
+require_once "../vendor/autoload.php";
 use CrudPoo\Fabricante;
 use CrudPoo\Produto;
-require_once "../vendor/autoload.php";
 $fabricante = new Fabricante;
 $produto = new Produto;
 $listaDeFabricantes = $fabricante->lerFabricantes();
@@ -59,7 +59,6 @@ if(isset($_POST['atualizar'])) {
                   <!-- O Value do ID é para o banco-->
                 <option 
                   
-                
                 <?php
                 /* Se chave estrangeira for idêntica à chave primária (ou seja, se o código do fabricante do produto bater com o código do fabricante), então coloque o atributo selected no option */
                 if($umProduto['fabricante_id'] === $umFabricante['id']) echo " selected " ?>
@@ -67,7 +66,6 @@ if(isset($_POST['atualizar'])) {
                 value="<?=$umFabricante['id']?> ">
                         <?=$umFabricante['nome']?> <!-- Exibição -->
                 </option>
-                
                 
                 <?php
                 }

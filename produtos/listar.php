@@ -1,6 +1,6 @@
 <?php
-use CrudPoo\Produto;
 require_once "../vendor/autoload.php";
+use CrudPoo\Produto;
 $produto = new Produto;
 $listaDeProdutos = $produto->lerProdutos();
 ?>
@@ -57,10 +57,6 @@ $listaDeProdutos = $produto->lerProdutos();
    }
    ?>
 </section>
-
 <script src="../js/confirme.js"></script>
-
-
-
 </body>
 </html>

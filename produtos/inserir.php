@@ -1,8 +1,7 @@
 <?php
+require_once "../vendor/autoload.php";
 use CrudPoo\Fabricante;
 use CrudPoo\Produto;
-
-require_once "../vendor/autoload.php";
 $fabricante = new Fabricante;
 $produto = new Produto;
 $listaDeFabricantes = $fabricante->lerFabricantes();
@@ -30,8 +29,6 @@ if(isset($_POST['inserir'])) {
 <div class="container">
     <h1>Produtos | INSERT</h1>
     <hr>
-
-
 
     <form action="" method="post">
         <p>
@@ -80,11 +77,5 @@ if(isset($_POST['inserir'])) {
 
 <p><a href="inserir.php">Voltar para lista de Produtos</a></p>
 <p><a href="../index.php">Home</a></p>
-
-
-
-
-
-    
 </body>
 </html>
