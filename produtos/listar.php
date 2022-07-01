@@ -3,6 +3,7 @@ require_once "../vendor/autoload.php";
 use CrudPoo\Produto,Diversos\Utilitarios;
 $produto = new Produto;
 $listaDeProdutos = $produto->lerProdutos();
+// Utilitarios::teste($listaDeProdutos); // Teste
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
