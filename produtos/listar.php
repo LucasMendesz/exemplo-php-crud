@@ -40,6 +40,7 @@ $listaDeProdutos = $produto->lerProdutos();
 
          <article>
 
+             <hr>
            <p> <b>ID:</b> <?=$produto['id']?> </p>
            <h3> <b>Nome do produto:</b> <?=$produto['produto']?> </h3>
          <p> <b>Preço:</b> <?=number_format($produto ['preco'], 2, ",", ".")?> </p>
