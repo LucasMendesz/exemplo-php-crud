@@ -32,8 +32,11 @@
 
     <p>
         <label for="mensagem">Mensagem:</label>
-        <textarea name="Mensagem" id="Mensagem" cols="30" rows="10">Enviar</textarea>
+        <textarea name="Mensagem" id="Mensagem" cols="30" rows="10"></textarea>
     </p>
-    
+     
+    <p>
+    <button type="submit">Enviar</button>
+    </p>
 </body>
 </html>
