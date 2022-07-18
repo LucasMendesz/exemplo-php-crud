@@ -31,4 +31,4 @@ $dompdf = new Dompdf();
 $dompdf->loadHtml($conteudo);
 $dompdf->setPaper('A4', 'landscape');
 $dompdf->render();
-$dompdf->stream();
+$dompdf->stream("Resumo de Fabricantes - ".date("d-m-Y").".pdf");
