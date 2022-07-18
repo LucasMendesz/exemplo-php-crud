@@ -30,7 +30,24 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
     <hr>
     <h2>Lendo e carregando todos os fabricantes</h2>
 
-   <p><a href="inserir.php">Inserir um novo fabricante</a></p>
+   <p><a href="inserir.php">Inserir um novo fabricante</a>
+    <?php
+    // Verificando se o parâmetro existe
+    if(isset($_GET['exportarPDF'])){
+        // Inicializando uma sessão PHP
+        session_start();
+
+        // Criando uma variável de sessão
+        $_SESSION["dados"] = $listaDeFabricantes;
+        
+        // Redirecionando para o script de exportação
+           header("location:../exportar-pdf.php");
+    }
+    
+    ?>
+   <!-- flag/sinalizador com parâmetro exportarPDF -->
+   <a href="?exportarPDF">Exportar para PDF</a>
+  </p>
 
    <?php if (isset($_GET['status']) && $_GET['status'] == 'sucesso') {?>
     <p style="color: red;">Fabricante atualizado com sucesso!</p>
