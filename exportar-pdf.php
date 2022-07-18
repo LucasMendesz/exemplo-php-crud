@@ -4,6 +4,7 @@
 //use Diversos\Utilitarios;
 
 use Dompdf\Dompdf;
+use Dompdf\Options;
 require_once "vendor/autoload.php";
 
 session_start(); // inicialização a session
@@ -27,7 +28,14 @@ $conteudo = <<<HTML
 HTML;
 // echo $conteudo;
 
-$dompdf = new Dompdf();
+$options = new Options();
+$options->set('defaultFont', 'Courier');
+$dompdf = new Dompdf($options);
+
+// $options = $dompdf->getOptions();
+// $options->setDefaultFont('Verdana'); // NESSA SINTAXE NÃO FUNCIONOU
+// $dompdf->setOptions($options);
+
 $dompdf->loadHtml($conteudo);
 $dompdf->setPaper('A4', 'landscape');
 $dompdf->render();
