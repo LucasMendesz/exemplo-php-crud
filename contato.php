@@ -24,8 +24,8 @@ if (isset($_POST['enviar'])) {
         $mail->Host = 'smtp.mailtrap.io';
         $mail->SMTPAuth = true;
         $mail->Port = 2525;
-        $mail->Username = 'f8f75137ab4ace';
-        $mail->Password = 'c0c2277086b2fc';
+        $mail->Username = 'lucasmendes@sunioweb.com.br ';
+        $mail->Password = 'Teste@123';
 
         // Quem envia
         $mail->setFrom('contato@sitecrud.com', 'Site Crud');

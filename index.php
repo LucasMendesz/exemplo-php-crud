@@ -25,17 +25,7 @@
 
 </div>
 
-<?php 
-
-
-
-
-?>
-
-
-
-
-
+<p><a href="contato.php">Contato</p>   
     
 </body>
 </html>
